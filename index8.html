@@ -8,7 +8,7 @@
     <title>Lista zadań</title>
 </head>
 
-<body>
+<body onload="init()">
     <form>
 
         <h1>REGISTER</h1>
@@ -28,9 +28,16 @@
     
    
     <script>
-        
+       function init(){
+        document.getElementById('name').innerHTML = window.localStorage.getItem('name');
+            let taskList = JSON.parse(window.localStorage.getItem('taskList'));
+            if(taskList == null) {
+                taskList = Array();
+                window.localStorage.setItem('taskList', 
+                                    JSON.stringify(taskList));
+       }
             showTasks();
-        
+    }
         function addTask() {
             let task = document.getElementById('name').value;
             let taskList = JSON.parse(window.localStorage.getItem('taskList'));
